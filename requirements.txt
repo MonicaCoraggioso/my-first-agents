@@ -1,0 +1,20 @@
+# --- Basics ---
+numpy
+pandas
+scipy
+matplotlib
+seaborn
+scikit-learn
+tqdm
+python-dotenv
+requests
+
+# --- Notebooks ---
+jupyterlab
+ipykernel
+ipywidgets
+
+# --- Models ---
+torch
+transformers
+accelerate
