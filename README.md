@@ -44,26 +44,5 @@ python -c "import torch, transformers; print(torch.__version__, transformers.__v
 
 Next time, just run `conda activate my-first-agents`. In Jupyter or VS Code, pick the **Python (my-first-agents)** kernel.
 
-## Notes so far
-
-- **Chat format:** a conversation is a list of messages with a `role` (`system`, `user`, `assistant`) and `content`. `tokenizer.apply_chat_template` converts it into the format the model was trained on.
-- **Answer length:** `generate_response()` defaults to `max_new_tokens=50`, which cuts answers off mid-sentence. Pass a larger value (e.g. `300`) for complete answers.
-- **Structured prompts:** a Python dict can be passed to the model as text with `json.dumps`, which keeps instructions clear and machine-readable.
-- **Memory = the message list:** appending each prompt *and* each answer (as an `assistant` message) to the same `messages` list lets later prompts build on earlier results (notebook 1).
-- **Quasi-agent vs agent:** notebook 1 follows a fixed, hard-coded sequence of steps. A real agent also decides what to do next, uses tools and checks its own output, which matters because the model's answers vary in format (e.g. tests with or without the original function).
-- **Agent loop:** construct prompt (`agent_rules + memory`) → LLM picks an action → parse → execute the matching Python function → store the result in memory → repeat until `terminate` or a maximum number of iterations (notebook 2). Action results always go back to the LLM as `user` messages.
-- **Agent rules:** the system message lists the tools, the constraints and a fixed ```` ```action {...} ``` ```` JSON output format. The LLM orchestrates the tools (which one, when, with what arguments); the code executes them.
-- **Extracting code:** models wrap code in Markdown fences; splitting on ```` ``` ```` and taking the first block isolates the code, but anything in later blocks is lost.
-- **Hugging Face token:** without an `HF_TOKEN` the Hub shows an "unauthenticated requests" warning. It still works, but a free token gives faster downloads.
-
-## Saving Colab work to this repository
-
-Either use *File → Save a copy in GitHub* in Colab (then `git pull` locally), or download the `.ipynb`, move it into this folder and run:
-
-```bash
-git add .
-git commit -m "Describe the change"
-git push
-```
 
 Before saving, *Edit → Clear all outputs* keeps notebooks small and avoids GitHub's "Invalid Notebook" error from progress-bar widgets.
