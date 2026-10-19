@@ -5,9 +5,6 @@ Notebooks and notes written while following this course:
 > **AI Agents and Agentic AI with Python & Generative AI**
 > Dr. Jules White, Vanderbilt University, on Coursera
 > https://www.coursera.org/learn/ai-agents-python
->
-> First course of the specialization **AI Agents and Agentic AI in Python: Powered by Generative AI**
-> https://www.coursera.org/specializations/ai-agents-python
 
 The ideas, structure and much of the code come from the course. 
 
