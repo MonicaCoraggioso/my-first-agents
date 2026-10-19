@@ -32,7 +32,7 @@ Two more pieces connect them:
 
 ## 1. Simulate before you code
 
-Test a GAME design in a chat interface (ChatGPT, Claude, …) **before** writing any code. It's like a dress rehearsal: problems are cheapest to fix at this stage.
+Test a GAME design in a chat interface (ChatGPT, Claude, …) **before** writing any code. Problems are cheapest to fix at this stage.
 
 ### What a simulation checks
 
@@ -78,7 +78,7 @@ The LLM plays the agent, and **you play the environment**: you type in the resul
 
 ## 2. The components (framework, part 1)
 
-At first the framework *adds* complexity. That's deliberate: it buys flexibility and reuse, so new agents are built by **configuring** pieces rather than rewriting the loop.
+At first the framework *adds* complexity. This buys flexibility and reuse, so new agents are built by **configuring** pieces rather than rewriting the loop.
 
 ### G · Goals
 
@@ -343,47 +343,6 @@ The second example also gives **safety by construction**: a read-only agent simp
 5. **Memory management:** the framework updates memory automatically.
 
 The result is easier to understand and maintain, especially as an agent grows. The cost is more code and more layers at the start, which pays off from the second agent onward.
-
----
-
-## 8. How the notebook differs from the course
-
-| Topic | Course notes | Notebook (MiniCPM) |
-|---|---|---|
-| LLM | GPT-4o through LiteLLM | `openbmb/MiniCPM5-2B` with `transformers`, running locally |
-| Function calling | native (`tools=` in the API) | **emulated inside `generate_response`**: schemas written into the system prompt, a tolerant parser (```` ```action ````, `<action>`, ```` ```json ````) and one retry with an actionable error |
-| Environment results in the prompt | `role: "assistant"` in the code (`"user"` in the text of `update_memory`) | `role: "user"`, kept as `type: "environment"` in memory |
-| Unknown tool name | `get_action` → `None` → crash in `should_terminate` | same (left as an exercise) |
-| `terminate` schema | `"required": []` but the function needs `message` | same (left as an exercise) |
-| `get_memories(limit)` | described as "last N", but the code returns the first N | same, with a warning comment |
-| Tool decorators / tags | described | not implemented yet |
-
-**Design note:** following section 4, the *cleaner* way to support a model without function calling is a separate **`AgentJsonActionLanguage`** (prompt-based format + parser) rather than emulation inside `generate_response`. The notebook's approach works and needed no changes to the framework, but the language-based version is the one the notes recommend, and it would make the agent's reasoning visible in memory too.
-
----
-
-## 9. Cheat sheet
-
-```python
-# 1. Goals
-goals = [Goal(1, "Task", "What to achieve"), Goal(1, "Terminate", "When and how to stop")]
-
-# 2. Actions
-registry = ActionRegistry()
-registry.register(Action(name="read_file", function=read_file, description="Read a file",
-                         parameters={"type": "object", "properties": {"file_name": {"type": "string"}},
-                                     "required": ["file_name"]}))
-registry.register(Action(name="terminate", function=lambda message: message,
-                         description="End and report", terminal=True,
-                         parameters={"type": "object", "properties": {"message": {"type": "string"}},
-                                     "required": ["message"]}))
-
-# 3-4. Language + environment, then the agent
-agent = Agent(goals, AgentFunctionCallingActionLanguage(), registry, generate_response, Environment())
-
-# 5. Run (memory is created inside run)
-memory = agent.run("Do the task", max_iterations=20)
-```
 
 **Checklist for a new agent:**
 

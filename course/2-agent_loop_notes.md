@@ -349,18 +349,4 @@ These come from the physics version of this agent ([`physics_agent_pendulum.ipyn
 | no `ask_user` tool | the agent can't really ask questions | add the tool |
 | the `user` role is used for results | works, but mixes user input with tool output | real APIs have a dedicated *tool* role |
 
----
 
-## 12. Cheat sheet
-
-**Building a simple agent:**
-
-1. Write the **agent rules**: role, tools (preferably as a JSON schema), constraints, the response format, and when to `terminate`.
-2. Write the **tools** as Python functions that return short text or JSON and return errors as text.
-3. Write **`parse_action`**: extract the ```` ```action ```` block, run `json.loads`, check the keys, and return an `error` action otherwise.
-4. Write the **execution** step that maps `tool_name` to a function, wrapped in `try/except`.
-5. **Memory** starts with the task. After each step, append the `assistant` response and the `user` result.
-6. **Loop** with `max_iterations`, and `break` on `terminate`.
-7. **Debug** by reading the raw responses and the memory.
-
-**Adding a tool takes three edits:** the agent rules (schema), the Python function, and an `elif` branch in the execution step.
