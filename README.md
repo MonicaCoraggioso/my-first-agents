@@ -6,7 +6,8 @@ Learning to build AI agents from scratch with a small open-source model (MiniCPM
 
 | File | What it is |
 |---|---|
-| [`physics_agent_pendulum.ipynb`](projects/physics_agent_pendulum.ipynb) | A **physics agent**: the agent loop from the course applied to a physics problem. Its numerical tools simulate the nonlinear pendulum (`solve_ivp`), measure the period and compute the small-angle prediction; the agent decides which simulations to run and explains why the period grows with amplitude. Tools are verified against the exact elliptic-integral solution. Includes an analysis of a real run and exercises. |
+| [`1-physics_agent_pendulum.ipynb`](projects/1-physics_agent_pendulum.ipynb) | A **physics agent**: the agent loop from the course applied to a physics problem. Its numerical tools simulate the nonlinear pendulum (`solve_ivp`), measure the period and compute the small-angle prediction; the agent decides which simulations to run and explains why the period grows with amplitude. Tools are verified against the exact elliptic-integral solution. Includes an analysis of a real run and exercises. |
+| [`2-physics_agent_pendulum_GAME.ipynb`](projects/2-physics_agent_pendulum_GAME.ipynb) | The same physics agent rebuilt with the **GAME framework** from the course: physics tools as `Action`s, instructions as `Goal`s, and the framework loop unchanged. Adds what notebook 1 lacked: a tolerant parser and a retry with an actionable error message, plus a `SafeAgent` subclass so a bad tool call never crashes the loop. Task: find the amplitude at which the period is 10% longer than the small-angle period; the agent's simulations are checked against the exact solution. |
 
 ## `course/` — following the Coursera course on agentic AI
 
