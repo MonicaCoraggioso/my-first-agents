@@ -323,7 +323,7 @@ Why these changes help:
 
 ## 10. Lessons from running it (with MiniCPM)
 
-These come from the physics version of this agent ([`2test-physics_agent_pendulum.ipynb`](2test-physics_agent_pendulum.ipynb)), which uses the same loop:
+These come from the physics version of this agent ([`physics_agent_pendulum.ipynb`](../projects/physics_agent_pendulum.ipynb)), which uses the same loop:
 
 - **The reasoning can be right while the format is wrong.** MiniCPM planned the steps correctly but wrapped its action in `<action>…</action>` tags instead of ```` ```action ````. The parser rejected every answer.
 - **The angle-bracket template line** (`<Stop and think…>`) probably invited the XML-style tags.

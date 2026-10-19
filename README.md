@@ -1,17 +1,29 @@
 # my-first-agents
 
-## Contents
+Learning to build AI agents from scratch with a small open-source model (MiniCPM) running locally.
+
+## `projects/` — my own work
 
 | File | What it is |
 |---|---|
-| [`0-test_MiniCPM.ipynb`](0-test_MiniCPM.ipynb) | First experiment: loads **MiniCPM** (`openbmb/MiniCPM5-2B`) with 🤗 `transformers`, defines a `generate_response()` helper for chat messages, and tests a system-prompt fact and a JSON-structured coding request. |
-| [`1-building_quasi_agent.ipynb`](1-building_quasi_agent.ipynb) | A **quasi-agent**: chains three prompts with a shared conversation memory to turn a one-line description into a function, add its documentation, write `unittest` tests, and save everything to a `.py` file. |
-| [`2-building_my_first_simple_agent.ipynb`](2-building_my_first_simple_agent.ipynb) | A first real **agent** that can list and read files and answer questions about them. Builds the full **agent loop** step by step: construct prompt (rules + memory) → generate response → parse `{tool_name, args}` (with error fallback) → execute the tool → update memory → continue or stop (`terminate` / max iterations), then runs it all in one `while` loop with improved agent rules (JSON tool schema + step-by-step thinking). |
-| [`2test-physics_agent_pendulum.ipynb`](2test-physics_agent_pendulum.ipynb) | A **physics agent**: same agent loop as notebook 2, with numerical tools that simulate the nonlinear pendulum (`solve_ivp`), measure its period and compute the small-angle prediction. The agent decides which simulations to run and explains why the period grows with amplitude. Tools are verified against the exact elliptic-integral solution. Includes exercises. |
-| [`3-building_agent_with_GAME.ipynb`](3-building_agent_with_GAME.ipynb) | A small reusable **agent framework** designed with **GAME** (Goals, Actions, Memory, Environment): `Goal`, `Action` + `ActionRegistry`, `Memory`, `Environment`, an `AgentLanguage` that builds the prompt and parses the reply, and an `Agent` class running the loop. Uses MiniCPM with prompt-based function calling (tolerant parser + retry). Example: an agent that reads the project files and writes a README. |
-| [`agent_loop_notes.md`](agent_loop_notes.md) | Full summary of the course notes for notebook 2: the six steps of the agent loop, agent rules, parsing with error fallback, execution, memory, termination, improved rules (GAIL), and lessons from running it with MiniCPM. |
-| [`GAME_framework_notes.md`](GAME_framework_notes.md) | Full summary of the course notes on the GAME framework: simulating agents in a chat, the components, the agent loop, `AgentLanguage`, tool decorators and tag-based registries, plus how the notebook differs from the course. |
+| [`physics_agent_pendulum.ipynb`](projects/physics_agent_pendulum.ipynb) | A **physics agent**: the agent loop from the course applied to a physics problem. Its numerical tools simulate the nonlinear pendulum (`solve_ivp`), measure the period and compute the small-angle prediction; the agent decides which simulations to run and explains why the period grows with amplitude. Tools are verified against the exact elliptic-integral solution. Includes an analysis of a real run and exercises. |
+
+## `course/` — following the Coursera course on agentic AI
+
+Based on [*AI Agents and Agentic AI with Python & Generative AI*](https://www.coursera.org/learn/ai-agents-python) (Vanderbilt University, Coursera). Notebooks are numbered in the order of the course and use MiniCPM locally instead of the course's hosted models. See [`course/README.md`](course/README.md) for details.
+
+| File | What it is |
+|---|---|
+| [`0-test_MiniCPM.ipynb`](course/0-test_MiniCPM.ipynb) | First experiment: loads **MiniCPM** (`openbmb/MiniCPM5-2B`) with 🤗 `transformers`, defines a `generate_response()` helper for chat messages, and tests a system-prompt fact and a JSON-structured coding request. |
+| [`1-building_quasi_agent.ipynb`](course/1-building_quasi_agent.ipynb) | A **quasi-agent**: chains three prompts with a shared conversation memory to turn a one-line description into a function, add its documentation, write `unittest` tests, and save everything to a `.py` file. |
+| [`2-building_my_first_simple_agent.ipynb`](course/2-building_my_first_simple_agent.ipynb) | A first real **agent** that can list and read files and answer questions about them. Builds the full **agent loop** step by step: construct prompt (rules + memory) → generate response → parse `{tool_name, args}` (with error fallback) → execute the tool → update memory → continue or stop (`terminate` / max iterations), then runs it all in one `while` loop with improved agent rules (JSON tool schema + step-by-step thinking). |
+| [`2-agent_loop_notes.md`](course/2-agent_loop_notes.md) | Notes for notebook 2: the six steps of the agent loop, agent rules, parsing with error fallback, execution, memory, termination, improved rules (GAIL), and lessons from running it with MiniCPM. |
+| [`3-building_agent_with_GAME.ipynb`](course/3-building_agent_with_GAME.ipynb) | A small reusable **agent framework** designed with **GAME** (Goals, Actions, Memory, Environment): `Goal`, `Action` + `ActionRegistry`, `Memory`, `Environment`, an `AgentLanguage` that builds the prompt and parses the reply, and an `Agent` class running the loop. Uses MiniCPM with prompt-based function calling (tolerant parser + retry). |
+| [`3-GAME_framework_notes.md`](course/3-GAME_framework_notes.md) | Notes for notebook 3: simulating agents in a chat, the GAME components, the agent loop, `AgentLanguage`, tool decorators and tag-based registries, plus how the notebook differs from the course. |
+
+## Other files
+
+| File | What it is |
+|---|---|
 | `requirements.txt` | Python packages for the local environment. |
 | `.gitignore` | Files Git should ignore (caches, virtual environments, `.DS_Store`, …). |
-
-Notebooks are numbered (`0-`, `1-`, …) in the order they were written.
