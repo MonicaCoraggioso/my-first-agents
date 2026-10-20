@@ -6,7 +6,8 @@ Learning to build AI agents from scratch with a small open-source model (MiniCPM
 
 | File | What it is |
 |---|---|
-| [`1-lab_data_agent_unknown_planet.ipynb`](projects/1-lab_data_agent_unknown_planet.ipynb) | A **lab-data agent** that measures *g* on an "unknown planet". Pendulum measurements are generated with a random, hidden *g*, noise and damping, and saved as messy CSV files (a length in cm, a large-amplitude run, a corrupted file). The agent (a small local LLM in a tool-using loop) explores the files, measures the periods, decides which runs to trust, fits *g* and explains its choices. **Saved run:** *g* within 0.1% of the hidden value, all three data problems caught; the same LLM without tools could not answer. Self-contained: includes the agent framework and explanations. |
+| [`1-lab_data_agent_unknown_planet.ipynb`](projects/1-lab_data_agent_unknown_planet.ipynb) | A **lab-data agent** that measures *g* on an "unknown planet". Pendulum measurements are generated with a random, hidden *g*, noise and damping, and saved as messy CSV files (a length in cm, a large-amplitude run, a corrupted file). The agent (a small local LLM in a tool-using loop) explores the files, measures the periods, decides which runs to trust, fits *g* and explains its choices. **Saved run:** *g* within 0.1% of the hidden value, all three data problems caught; the same LLM without tools could not answer. Uses `agent_framework.py`; explanations included. |
+| [`agent_framework.py`](projects/agent_framework.py) | A small reusable **agent framework** (Goals, Actions, Memory, Environment), adapted from the course for a local LLM: emulated function calling with a tolerant parser and retry, and a loop that never crashes on bad tool calls. Imported by the notebooks in `projects/`. |
 
 ## `course/` — following the Coursera course on agentic AI
 
